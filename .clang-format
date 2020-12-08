@@ -1,0 +1,12 @@
+Language: Cpp
+BasedOnStyle: WebKit
+
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortLambdasOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Mozilla
+ColumnLimit: 120
+FixNamespaceComments: true
+IncludeBlocks: Regroup
+KeepEmptyLinesAtTheStartOfBlocks: false
+SpaceInEmptyBlock: false
