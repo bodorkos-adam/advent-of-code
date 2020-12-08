@@ -24,7 +24,6 @@ def p1(seats: list[str]) -> int:
 
 def p2(seats: list[str]) -> int:
     seat_ids = set()
-    max_id = 0
 
     for seat in seats:
         row = decode(seat[:7], 'B')
@@ -32,9 +31,9 @@ def p2(seats: list[str]) -> int:
         id = row * 8 + col
 
         seat_ids.add(id)
-        max_id = max(id, max_id)
 
     min_id = min(seat_ids)
+    max_id = max(seat_ids)
 
     for id in range(min_id, max_id + 1):
         if id not in seat_ids:
