@@ -29,8 +29,8 @@ def parse_container_rule(raw_rule: str) -> tuple[str, dict[str, int]]:
 def parse_rules(raw_rules: list[str]) -> dict[str, dict[str, int]]:
     color_rules: dict[str, dict[str, int]] = {}
 
-    for rule_str in raw_rules:
-        color, rules = parse_container_rule(rule_str)
+    for raw_rule in raw_rules:
+        color, rules = parse_container_rule(raw_rule)
         color_rules[color] = rules
 
     return color_rules
