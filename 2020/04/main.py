@@ -1,12 +1,7 @@
 import re
 
 
-with open('input.txt') as f:
-    data = f.read()
-    passports = [p.rstrip().replace('\n', ' ').split(' ') for p in data.split('\n\n')]
-
-
-def p1():
+def p1(passports: list[list[str]]):
     num_valid = 0
     required_fields = {'byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'}
 
@@ -16,10 +11,10 @@ def p1():
         if required_fields.issubset(fields):
             num_valid += 1
 
-    print(num_valid)
+    return num_valid
 
 
-def p2():
+def p2(passports: list[list[str]]):
     num_valid = 0
 
     for p in passports:
@@ -66,8 +61,11 @@ def p2():
 
         num_valid += 1
 
-    print(num_valid)
+    return num_valid
 
 
-p1()
-p2()
+with open('input.txt') as f:
+    passports = [p.rstrip().replace('\n', ' ').split(' ') for p in f.read().split('\n\n')]
+
+print(p1(passports))
+print(p2(passports))

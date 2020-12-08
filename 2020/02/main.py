@@ -1,11 +1,10 @@
 import re
 
-def p1():
-    RE = re.compile('(\d+)-(\d+) ([a-z]): ([a-z]+)')
 
-    with open('input.txt') as f:
-        lines = f.readlines()
+RE = re.compile('(\d+)-(\d+) ([a-z]): ([a-z]+)')
 
+
+def p1(lines: list[str]) -> int:
     num_valid = 0
 
     for line in lines:
@@ -18,15 +17,10 @@ def p1():
         if lo <= password.count(letter) <= hi:
             num_valid += 1
 
-    print(num_valid)
+    return num_valid
 
 
-def p2():
-    RE = re.compile('(\d+)-(\d+) ([a-z]): ([a-z]+)')
-
-    with open('input.txt') as f:
-        lines = f.readlines()
-
+def p2(lines: list[str]) -> int:
     num_valid = 0
 
     for line in lines:
@@ -41,6 +35,11 @@ def p2():
         if num_pos_matches == 1:
             num_valid += 1
 
-    print(num_valid)
+    return num_valid
 
-p2()
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+print(p1(lines))
+print(p2(lines))

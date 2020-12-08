@@ -1,9 +1,7 @@
-import functools
+from functools import reduce
 
-with open('input.txt') as f:
-    lines = f.readlines()
 
-def count_trees(lines, num_advance_right, num_advance_down = 1):
+def count_trees(lines: list[str], num_advance_right: int, num_advance_down: int) -> int:
     num_trees = 0
     num_lines = len(lines)
     num_cols = len(lines[0]) - 1
@@ -18,12 +16,23 @@ def count_trees(lines, num_advance_right, num_advance_down = 1):
 
     return num_trees
 
-res = [
-    count_trees(lines, 1, 1),
-    count_trees(lines, 3, 1),
-    count_trees(lines, 5, 1),
-    count_trees(lines, 7, 1),
-    count_trees(lines, 1, 2)
-]
 
-print(functools.reduce(lambda a, b: a * b, res))
+def p1(lines: list[str]) -> int:
+    return count_trees(lines, 3, 1)
+
+
+def p2(lines: list[str]) -> int:
+    return reduce(lambda a, b: a * b, [
+        count_trees(lines, 1, 1),
+        count_trees(lines, 3, 1),
+        count_trees(lines, 5, 1),
+        count_trees(lines, 7, 1),
+        count_trees(lines, 1, 2)
+    ])
+
+
+with open('input.txt') as f:
+    lines = f.readlines()
+
+print(p1(lines))
+print(p2(lines))
