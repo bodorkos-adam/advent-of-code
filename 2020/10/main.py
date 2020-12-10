@@ -1,35 +1,22 @@
-def find_chain(adapters: set[int], current_adapter: int, j1: int, j2: int, j3: int) -> tuple[bool, int, int, int]:
-    if current_adapter + 1 in adapters:
-        j1 += 1
-        uses_all, j1, j2, j3 = find_chain(adapters, current_adapter + 1, j1, j2, j3)
+def find_chain(adapters: set[int], current_adapter: int, num_jumps: list[int]) -> tuple[bool, list[int]]:
+    for i in range(1, 4):
+        if current_adapter + i in adapters:
+            num_jumps[i - 1] += 1
+            uses_all, num_jumps = find_chain(adapters, current_adapter + i, num_jumps)
 
-        if uses_all:
-            return True, j1, j2, j3
-
-    if current_adapter + 2 in adapters:
-        j2 += 1
-        uses_all, j1, j2, j3 = find_chain(adapters, current_adapter + 2, j1, j2, j3)
-
-        if uses_all:
-            return True, j1, j2, j3
-
-    if current_adapter + 3 in adapters:
-        j3 += 1
-        uses_all, j1, j2, j3 = find_chain(adapters, current_adapter + 3, j1, j2, j3)
-
-        if uses_all:
-            return True, j1, j2, j3
+            if uses_all:
+                return True, num_jumps
 
     if current_adapter == max(adapters):
-        j3 += 1
-        return True, j1, j2, j3
+        num_jumps[2] += 1
+        return True, num_jumps
 
-    return False, j1, j2, j3
+    return False, num_jumps
+
 
 def p1(adapters: set[int]) -> int:
-    uses_all, j1, j2, j3 = find_chain(adapters, 0, 0, 0, 0)
-
-    return j1 * j3
+    _, num_jumps = find_chain(adapters, 0, [0, 0, 0])
+    return num_jumps[0] * num_jumps[2]
 
 
 with open('input.txt') as f:
